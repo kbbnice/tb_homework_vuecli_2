@@ -8,14 +8,13 @@ export default new Vuex.Store({
     curPath: '/'
   },
   mutations: {
-    changePath(curPath, param) {
-      curPath = param
+    changePath(state, param) {
+     return state.curPath = param.meta.parentTitle + "/" + param.meta.title
     }
   },
   actions: {
     changePathFun(context, param) {
-      context.commit('changePath', param)
-
+      return context.commit('changePath', param)
     }
   },
   modules: {

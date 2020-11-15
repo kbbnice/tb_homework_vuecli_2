@@ -7,6 +7,7 @@
       text-color="#fff"
       @select="handleSelect"
       active-text-color="rgb(126, 189, 255)"
+      :unique-opened="true"
     >
       <el-submenu index="1">
         <template slot="title">
@@ -32,13 +33,13 @@
           <span>课程管理</span>
         </template>
 
-        <el-menu-item index="2-1">
+        <el-menu-item index="/course/required">
           <template slot="title">
             <i class="el-icon-menu"></i>
             <span>必修课</span>
           </template>
         </el-menu-item>
-        <el-menu-item index="2-2">
+        <el-menu-item index="/course/elective">
           <template slot="title">
             <i class="el-icon-menu"></i>
             <span>选修课</span>
@@ -53,8 +54,9 @@
 export default {
   methods: {
     handleSelect(param) {
-      this.$store.dispatch('changePathFun', param)
       this.$router.push(param)
+    this.$store.dispatch('changePathFun', this.$route)
+      console.log(this.$route)
     },
   },
 };

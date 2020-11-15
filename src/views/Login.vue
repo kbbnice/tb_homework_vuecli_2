@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="login-wrap">
-      <h1 class="login-title">登录</h1>
+      <h1 class="login-title">学生课程管理系统</h1>
       <div class="login-box">
         <div class="login-form">
           <!-- 用户名 -->
@@ -53,15 +53,47 @@ export default {
     submit() {
       let that = this;
 
-      //  登录请求
-      that.axios.get('/')
-        .then(res => {
-          console.log(res)
-        })
+      // Mock
+      that.Mock.mock("/login", {
+        userInfo: {
+          id: 1,
+          name: "user",
+        },
+        state: "success",
+      });
 
-      
+      //  登录请求
+      that.axios
+        .post("/login", {
+          username: that.formData.username,
+          password: that.formData.password,
+        })
+        .then((res) => {
+          // 登录成功：
+          if (res.data.state === "success") {
+            that.setStorage('userInfo', res.data.userInfo)
+            that.$message({
+              message: "登录成功",
+              type: "success",
+            });
+            setTimeout(() => {
+              that.$router.push("/");
+            }, 500);
+          } else {
+            that.$message({
+              message: "登录失败",
+              type: "error",
+            });
+          }
+        });
+    },
+
+    // 设置 localstorage:
+    setStorage(key, value) {
+      window.localStorage.setItem(key, JSON.stringify(value));
     },
   },
+  created() {},
 };
 </script>
 
@@ -78,10 +110,10 @@ export default {
     z-index: 2;
     .login-title {
       color: #fff;
-      font-size: 30px;
+      font-size: 40px;
       line-height: 40px;
       position: relative;
-      top: calc(50% - 190px);
+      top: 150px;
       text-align: center;
     }
     .login-box {
@@ -121,6 +153,7 @@ export default {
         font-size: 16px;
         line-height: 40px;
         border-radius: 5px;
+        cursor: pointer;
       }
     }
   }

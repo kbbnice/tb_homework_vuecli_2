@@ -5,7 +5,9 @@
         <Menu></Menu>
       </el-aside>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <MyBread></MyBread>
+        </el-header>
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -16,11 +18,13 @@
 
 <script>
 import Menu from "@/components/Menu.vue";
+import MyBread from "@/components/MyBread.vue";
 
 export default {
   name: "Home",
   components: {
     Menu,
+    MyBread
   },
   methods: {
 
@@ -41,6 +45,9 @@ export default {
   top: 0;
   height: 60px;
   border-bottom: 1px solid #ccc;
+  /deep/ .el-breadcrumb{
+    line-height: 60px;
+  }
 }
 
 .el-aside {
@@ -58,8 +65,6 @@ export default {
 
 .el-main {
   color: #333;
-  text-align: center;
-  line-height: 160px;
   position: fixed;
   top: 60px;
   bottom: 0;

@@ -12,7 +12,53 @@ const routes = [
     children: [
       {
         path: '404',
-        component: () => import('../views/404.vue')
+        component: () => import('../views/404.vue'),
+        meta: {
+          title: "404"
+        }
+      },
+      {
+        path: 'member/teacher',
+
+        component: () => import('../views/member/Teacher.vue'),
+        meta: {
+          title: "老师列表",
+          parentTitle: "成员管理"
+        }
+
+      },
+      {
+        path: 'member/student',
+
+        component: () => import('../views/member/Student.vue'),
+        meta: {
+          title: "学生列表",
+          parentTitle: "成员管理"
+
+        }
+
+      },
+      {
+        path: 'course/required',
+
+        component: () => import('../views/course/Required.vue'),
+        meta: {
+          title: "必修课",
+          parentTitle: "课程管理"
+
+        }
+
+      },
+      {
+        path: 'course/elective',
+
+        component: () => import('../views/course/Elective.vue'),
+        meta: {
+          title: "选修课",
+          parentTitle: "课程管理"
+
+        }
+
       },
     ]
   },
@@ -41,7 +87,7 @@ router.beforeEach((to, from, next) => {
   if (to.path === "/login") {
     next()
   } else {
-    if(!userInfo) {
+    if (!userInfo) {
       next('/login')
     } else {
       next()
@@ -55,6 +101,14 @@ router.beforeEach((to, from, next) => {
 */
 function getStorage(key) {
   return JSON.parse(window.localStorage.getItem(key))
+}
+
+const RouterPush = VueRouter.prototype.push;
+
+VueRouter.prototype.push = function push(location) {
+
+  return RouterPush.call(this, location).catch(err => err)
+
 }
 
 export default router
