@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="login-wrap">
-      <h1 class="login-title">学生课程管理系统</h1>
+      <h1 class="login-title">学校后台管理系统</h1>
       <div class="login-box">
         <div class="login-form">
           <!-- 用户名 -->

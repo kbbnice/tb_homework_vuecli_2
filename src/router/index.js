@@ -23,7 +23,6 @@ const routes = [
         component: () => import('../views/member/Teacher.vue'),
         meta: {
           title: "老师列表",
-          parentTitle: "成员管理"
         }
 
       },
@@ -33,7 +32,6 @@ const routes = [
         component: () => import('../views/member/Student.vue'),
         meta: {
           title: "学生列表",
-          parentTitle: "成员管理"
 
         }
 
@@ -44,7 +42,6 @@ const routes = [
         component: () => import('../views/course/Required.vue'),
         meta: {
           title: "必修课",
-          parentTitle: "课程管理"
 
         }
 
@@ -55,10 +52,34 @@ const routes = [
         component: () => import('../views/course/Elective.vue'),
         meta: {
           title: "选修课",
-          parentTitle: "课程管理"
+
 
         }
 
+      },
+      {
+        path: 'settings/password',
+
+        component: () => import('../views/settings/Password.vue'),
+        meta: {
+          title: "密码修改",
+        }
+      },
+      {
+        path: 'settings/info',
+
+        component: () => import('../views/settings/Info.vue'),
+        meta: {
+          title: "个人信息",
+        }
+      },
+      {
+        path: '/',
+
+        component: () => import('../views/settings/Info.vue'),
+        meta: {
+          title: "个人信息",
+        }
       },
     ]
   },

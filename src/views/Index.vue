@@ -30,7 +30,10 @@ export default {
 
   },
   created() {
-    
+    let that = this
+    window.onload = function() {
+      that.$router.push('/settings/info')
+    }
   },
 };
 </script>
@@ -44,7 +47,8 @@ export default {
   right: 0;
   top: 0;
   height: 60px;
-  border-bottom: 1px solid #ccc;
+  // border-bottom: 1px solid #ccc;
+  background: #fff;
   /deep/ .el-breadcrumb{
     line-height: 60px;
   }

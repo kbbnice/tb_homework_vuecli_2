@@ -1,48 +1,28 @@
 <template>
   <div class="my-menu">
     <el-menu
-      default-active="2"
+      :default-active="pathList[1].children[1].path"
       class="el-menu-vertical-demo"
       background-color="#5f35d1"
       text-color="#fff"
-      @select="handleSelect"
       active-text-color="rgb(126, 189, 255)"
       :unique-opened="true"
     >
-      <el-submenu index="1">
+      <el-submenu v-for="(subList, subIndex) in pathList" :key="subList.uid" :index="subList.path">
         <template slot="title">
           <i class="el-icon-menu"></i>
-          <span>成员管理</span>
-        </template>
-        <el-menu-item index="/member/teacher">
-          <template slot="title">
-            <i class="el-icon-menu"></i>
-            <span>老师列表</span>
-          </template>
-        </el-menu-item>
-        <el-menu-item index="/member/student">
-          <template slot="title">
-            <i class="el-icon-menu"></i>
-            <span>学生列表</span>
-          </template>
-        </el-menu-item>
-      </el-submenu>
-      <el-submenu index="2">
-        <template slot="title">
-          <i class="el-icon-menu"></i>
-          <span>课程管理</span>
+          <span>{{ subList.name }}</span>
         </template>
 
-        <el-menu-item index="/course/required">
+        <el-menu-item
+          :index="item.path"
+          v-for="(item, index) in subList.children"
+          :key="item.id"
+          @click="handleSelect(subIndex, index)"
+        >
           <template slot="title">
             <i class="el-icon-menu"></i>
-            <span>必修课</span>
-          </template>
-        </el-menu-item>
-        <el-menu-item index="/course/elective">
-          <template slot="title">
-            <i class="el-icon-menu"></i>
-            <span>选修课</span>
+            <span>{{ item.name }}</span>
           </template>
         </el-menu-item>
       </el-submenu>
@@ -52,19 +32,83 @@
 
 <script>
 export default {
+  data() {
+    return {
+      pathList: [
+        // {
+        //   path: '/course',
+        //   name: '课程管理',
+        //   children: [
+        //     {
+        //       name: '必修课',
+        //       path: '/required',
+        //     },
+        //     {
+        //       name: '选修课',
+        //       path: '/elective',
+        //     },
+        //   ],
+        // },
+        {
+          path: '/member',
+          name: '成员管理',
+          children: [
+            {
+              name: '老师管理',
+              path: '/teacher',
+            },
+            {
+              name: '学生管理',
+              path: '/student',
+            },
+          ],
+        },
+         {
+          path: '/settings',
+          name: '个人中心',
+          children: [
+            {
+              name: '密码修改',
+              path: '/password',
+            },
+            {
+              name: '个人信息',
+              path: '/info',
+            },
+          ],
+        },
+      ],
+    }
+  },
   methods: {
-    handleSelect(param) {
-      this.$router.push(param)
-    this.$store.dispatch('changePathFun', this.$route)
-      console.log(this.$route)
+    handleSelect(subIndex, index) {
+      this.$router.push(this.getPath(subIndex, index))
+      this.$store.dispatch('changePathFun', this.getName(subIndex, index))
+    },
+
+    // 获取跳转路由
+    getPath(subIndex, index) {
+      return (
+        this.pathList[subIndex].path +
+        this.pathList[subIndex].children[index].path
+      )
+    },
+
+    // 获取课程名称
+    getName(subIndex, index) {
+      return (
+        this.pathList[subIndex].name +
+        '/' +
+        this.pathList[subIndex].children[index].name
+      )
     },
   },
-};
+}
 </script>
 
 <style lang="less">
-    .el-menu {
-        width: 280px;
-        overflow-x: hidden;
-    }
+.el-menu {
+  width: 280px;
+  overflow-x: hidden;
+}
 </style>
