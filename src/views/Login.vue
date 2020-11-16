@@ -10,7 +10,7 @@
               type="text"
               id="uname"
               placeholder="username"
-              v-model="formData.username"
+              v-model="loginData.name"
             />
           </div>
 
@@ -20,7 +20,7 @@
               type="password"
               id="pwd"
               placeholder="password"
-              v-model="formData.password"
+              v-model="loginData.pwd"
             />
           </div>
         </div>
@@ -33,17 +33,15 @@
 </template>
 
 <script>
-// 背景
-
-// api
+import { fetchLogin } from "@/mock";
 
 export default {
   name: "login",
   data() {
     return {
-      formData: {
-        username: "",
-        password: "",
+      loginData: {
+        name: "",
+        pwd: "",
       },
     };
   },
@@ -53,25 +51,19 @@ export default {
     submit() {
       let that = this;
 
-      // Mock
-      that.Mock.mock("/login", {
-        userInfo: {
-          id: 1,
-          name: "user",
-        },
-        state: "success",
-      });
+      // mock 拦截 login 请求
+      fetchLogin()
 
       //  登录请求
       that.axios
-        .post("/login", {
-          username: that.formData.username,
-          password: that.formData.password,
+        .post("/fetchLogin", {
+          username: that.loginData.name,
+          password: that.loginData.pwd,
         })
         .then((res) => {
           // 登录成功：
-          if (res.data.state === "success") {
-            that.setStorage('userInfo', res.data.userInfo)
+          if (res.data.state === "ok") {
+            that.setStorage("userInfo", res.data.userInfo);
             that.$message({
               message: "登录成功",
               type: "success",
@@ -106,7 +98,7 @@ export default {
     top: 0;
     bottom: 0;
     overflow-y: scroll;
-    background: #5f35d1;
+    background: #349e66;
     z-index: 2;
     .login-title {
       color: #fff;
@@ -138,7 +130,7 @@ export default {
             background: transparent;
             border-bottom: 1px solid #999;
             &:focus {
-              border-bottom: 1px solid #5f35d1;
+              border-bottom: 1px solid #349e66;
             }
           }
         }
@@ -146,7 +138,7 @@ export default {
 
       .login-btn {
         margin: 0 auto;
-        background: #5f35d1;
+        background: #349e66;
         color: #fff;
         box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
         text-align: center;

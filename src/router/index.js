@@ -11,50 +11,44 @@ const routes = [
     component: Home,
     children: [
       {
-        path: '404',
-        component: () => import('../views/404.vue'),
+        path: '/',
+
+        component: () => import('../views/Home.vue'),
         meta: {
-          title: "404"
+          title: "首页",
         }
+
       },
       {
-        path: 'member/teacher',
+        path: '/course/add',
 
-        component: () => import('../views/member/Teacher.vue'),
+        component: () => import('../views/course/Add.vue'),
         meta: {
           title: "老师列表",
         }
 
       },
       {
-        path: 'member/student',
+        path: 'course/list',
 
-        component: () => import('../views/member/Student.vue'),
+        component: () => import('../views/course/List.vue'),
         meta: {
           title: "学生列表",
 
         }
       },
       {
-        path: 'settings/password',
+        path: '/admin/password',
 
-        component: () => import('../views/settings/Password.vue'),
+        component: () => import('../views/admin/Password.vue'),
         meta: {
           title: "密码修改",
         }
       },
       {
-        path: 'settings/info',
+        path: '/admin/about',
 
-        component: () => import('../views/settings/Info.vue'),
-        meta: {
-          title: "个人信息",
-        }
-      },
-      {
-        path: '/',
-
-        component: () => import('../views/settings/Info.vue'),
+        component: () => import('../views/admin/About.vue'),
         meta: {
           title: "个人信息",
         }
@@ -64,10 +58,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: () => import('../views/Login.vue')
   }
 ]
 
