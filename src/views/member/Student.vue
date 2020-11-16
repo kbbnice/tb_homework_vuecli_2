@@ -4,7 +4,7 @@
       <el-table-column type="index" width="50" label="序号"></el-table-column>
       <el-table-column prop="name" label="姓名" width="90"></el-table-column>
       <el-table-column prop="studentId" width="120" label="学号"></el-table-column>
-      <el-table-column prop="date" label="日期" width="180"></el-table-column>
+      <el-table-column prop="date" label="出生日期" width="180"></el-table-column>
       <el-table-column prop="address" label="地址"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
@@ -25,11 +25,11 @@
             <el-option label="女" value="0"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="工号">
-          <el-input v-model="form.teacherId" autocomplete="off"></el-input>
+        <el-form-item label="学号">
+          <el-input v-model="form.studentId" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="工龄">
-          <el-input v-model="form.teachYear" autocomplete="off"></el-input>
+        <el-form-item label="出生日期">
+          <el-input v-model="form.date" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="地址">
           <el-input v-model="form.address" autocomplete="off"></el-input>

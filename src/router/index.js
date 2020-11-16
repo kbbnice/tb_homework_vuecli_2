@@ -34,28 +34,6 @@ const routes = [
           title: "学生列表",
 
         }
-
-      },
-      {
-        path: 'course/required',
-
-        component: () => import('../views/course/Required.vue'),
-        meta: {
-          title: "必修课",
-
-        }
-
-      },
-      {
-        path: 'course/elective',
-
-        component: () => import('../views/course/Elective.vue'),
-        meta: {
-          title: "选修课",
-
-
-        }
-
       },
       {
         path: 'settings/password',
