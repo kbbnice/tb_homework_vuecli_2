@@ -30,6 +30,12 @@
                 <span>课程列表</span>
               </template>
             </el-menu-item>
+            <el-menu-item index="/course/add">
+              <template slot="title">
+                <i class="el-icon-menu"></i>
+                <span>添加课程</span>
+              </template>
+            </el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>

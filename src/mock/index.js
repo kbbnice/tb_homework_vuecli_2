@@ -69,7 +69,6 @@ function fetchLogin() {
     return Mock.mock('/fetchLogin', loginData)
 }
 
-
 export {
     fetchCourse,
     fetchLogin

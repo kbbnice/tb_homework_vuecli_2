@@ -14,17 +14,36 @@ const defaultVuex = new Vuex.Store({
   },
   mutations: {
 
+    // 获取课程
     getCourseList(state, params) {
       state.courseList = params
     },
 
+    // 添加课程
+    addCourse(state, params) {
+      state.courseList.unshift(params)
+    },
+
+    // 移除课程
+    removeCourse(state, params) {
+      state.courseList.splice(params.index, 1)
+    } 
+
   },
   actions: {
 
-
-    getCourseListCommit(context, param) {
-      return context.commit('getCourseList', param)
+    getCourseListCommit(context, params) {
+      return context.commit('getCourseList', params)
     },
+
+    submitAddCourse(context, params) {
+      return context.commit('addCourse', params)
+
+    },
+
+    removeCourseCommit(context, params) {
+      return context.commit('removeCourse', params)
+    }
 
   },
   modules: {

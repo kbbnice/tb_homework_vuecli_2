@@ -1,62 +1,83 @@
 <template>
-  <div class="member-student">
-      <el-form :inline="true">
-        <el-form-item></el-form-item>
-      </el-form>
-
+  <div class="course-add">
+    <el-form label-width="80px">
+      <el-form-item label="课程ID">
+        <el-input v-model="form.id" maxlength="6" @input="checkId"></el-input>
+      </el-form-item>
+      <el-form-item label="课程名称">
+        <el-input v-model="form.course"></el-input>
+      </el-form-item>
+      <el-form-item label="课程描述">
+        <el-input type="textarea" v-model="form.desc"></el-input>
+      </el-form-item>
+      <el-form-item class="right">
+        <el-button @click="reset">重置</el-button>
+        <el-button type="primary" @click="submit">提交</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
-const TABLE_DATA = [
-  {
-    date: '2016-05-02',
-    name: '王小虎',
-    address: '上海市普陀区金沙江路 1518 弄',
-    sex: '男',
-  },
-]
 export default {
   data() {
     return {
-      dialogFormVisible: false,
-      curEditIndex: 0,
       form: {
-        id: '',
-        name: '',
-        teachYear: 0,
-        address: '',
-        sex: 1,
-        teacherId: 'T-10000',
+        id: "",
+        course: "",
+        desc: "",
       },
-    }
-  },
-  computed: {
-    tableData() {
-      return this.$store.state.studentList
-    },
+    };
   },
   methods: {
-    handleEdit(index, row) {
-      this.form = JSON.parse(JSON.stringify(this.tableData[index]))
-      this.form.sex = this.form.sex == 1 ? "男": "女"
-      this.curEditIndex = index
-      this.dialogFormVisible = true
+    // 重置
+    reset() {
+      for (let key in this.form) {
+        this.form[key] = "";
+      }
     },
 
-    submitEdit() {
-      this.$store.dispatch('editStudentFun', {
-        index: this.curEditIndex,
-        form: this.form,
-      })
-      this.tableData[this.curEditIndex] = this.form
-      this.dialogFormVisible = false
+    // 提交
+    submit() {
+      if (this.form.course.length === 0 || this.form.id.length === 0) {
+        this.$message({
+          message: "课程ID或课程名称不能为空！",
+          type: "error",
+        });
+        return;
+      }
+
+      if(this.form.desc.length === 0) {
+        this.form.desc = "暂无课程描述"
+      }
+      this.$store.dispatch("submitAddCourse", this.form);
+      this.$router.push("/course/list");
     },
-    handleDelete(index, row) {
-      console.log(index, row)
-      this.$store.dispatch('deleteStudentFun', { index: index })
+
+    // 验证id长度
+    checkId() {
+      this.form.id = this.form.id.replace(/[^0-9]/g, "");
     },
   },
   created() {},
-}
+};
 </script>
+
+<style lang="less">
+.course-add {
+  .el-form {
+    width: 500px;
+    .el-textarea__inner {
+      height: 300px;
+    }
+    .right {
+      text-align: right;
+    }
+  }
+  /*添加css样式*/
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="login-wrap">
-      <h1 class="login-title">学校后台管理系统</h1>
+      <h1 class="login-title">课程管理系统</h1>
       <div class="login-box">
         <div class="login-form">
           <!-- 用户名 -->
@@ -9,7 +9,7 @@
             <input
               type="text"
               id="uname"
-              placeholder="username"
+              placeholder="用户名"
               v-model="loginData.name"
             />
           </div>
@@ -19,7 +19,7 @@
             <input
               type="password"
               id="pwd"
-              placeholder="password"
+              placeholder="密码"
               v-model="loginData.pwd"
             />
           </div>
@@ -102,33 +102,32 @@ export default {
     z-index: 2;
     .login-title {
       color: #fff;
-      font-size: 40px;
-      line-height: 40px;
+      font-size: 50px;
+      line-height: 50px;
       position: relative;
-      top: 150px;
+      top: 120px;
       text-align: center;
     }
     .login-box {
-      background: rgba(255, 255, 255, 0.7);
+      background:rgb(108 208 116);
       border-radius: 5px;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      padding: 40px 30px 30px;
+      padding: 60px 40px 50px;
+      border-radius: 18px;
       .login-form {
         margin-bottom: 50px;
         .login-item {
           margin-bottom: 30px;
           font-size: 16px;
-          line-height: 22px;
+          line-height: 36px;
 
           input {
             display: inline-block;
             width: 280px;
-            border: none;
-            background: transparent;
-            border-bottom: 1px solid #999;
+            line-height: 36px;
             &:focus {
               border-bottom: 1px solid #349e66;
             }
@@ -140,7 +139,7 @@ export default {
         margin: 0 auto;
         background: #349e66;
         color: #fff;
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 6px rgba(42, 104, 0, 0.3);
         text-align: center;
         font-size: 16px;
         line-height: 40px;

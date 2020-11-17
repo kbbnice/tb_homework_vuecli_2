@@ -24,6 +24,11 @@
         :cell-class-name="'text-left'"
       >
       </el-table-column>
+      <el-table-column width="120" >
+        <template slot-scope="scope">
+          <el-button type="danger" @click="removeCourse(scope.$index)">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -42,6 +47,8 @@ export default {
     },
   },
   methods: {
+
+    // 搜索
     search() {
       let input = this.input;
 
@@ -62,6 +69,12 @@ export default {
         });
       }
     },
+
+    // 移除课程
+    removeCourse(index){
+      this.$store.dispatch('removeCourseCommit', {index: index})
+
+    }
   },
   watch: {
     tableDataDefault(newValue) {
