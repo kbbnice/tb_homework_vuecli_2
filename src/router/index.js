@@ -36,23 +36,7 @@ const routes = [
           title: "学生列表",
 
         }
-      },
-      {
-        path: '/admin/password',
-
-        component: () => import('../views/admin/Password.vue'),
-        meta: {
-          title: "密码修改",
-        }
-      },
-      {
-        path: '/admin/about',
-
-        component: () => import('../views/admin/About.vue'),
-        meta: {
-          title: "个人信息",
-        }
-      },
+      }
     ]
   },
   {
